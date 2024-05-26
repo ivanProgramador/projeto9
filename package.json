@@ -1,0 +1,28 @@
+{
+  "name": "projeto9",
+  "version": "1.0.0",
+  "description": "api de compartilhamento de imagens",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivanProgramador/projeto9.git"
+  },
+  "author": "Ivan Rodrigues",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivanProgramador/projeto9/issues"
+  },
+  "homepage": "https://github.com/ivanProgramador/projeto9#readme",
+  "dependencies": {
+    "@types/jest": "^29.5.12",
+    "express": "^4.19.2",
+    "jest": "^29.7.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.0",
+    "nodemon": "^3.1.1",
+    "supertest": "^7.0.0"
+  }
+}
