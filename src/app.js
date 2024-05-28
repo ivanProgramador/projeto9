@@ -22,11 +22,32 @@ app.get("/",(req,res)=>{
     res.json({});
 });
 
-app.post("/user",(req,res)=>{
+app.post("/user", async (req,res)=>{
 
     if(req.body.name=="" || req.body.email =="" || req.body.password ==""){
         res.sendStatus(400);
         return;
+    }
+
+    //checando se o email esta repetido
+    
+    try {
+
+        let user = await User.findOne({"email": req.body.email});
+
+        if(user != undefined){
+            res.statusCode = 400;
+            res.json({error:"E-mail já cadastrado"});
+            return;
+        }
+
+
+      
+
+        
+      }catch (error) {
+        res.sendStatus(500)
+        
     }
 
     try {
