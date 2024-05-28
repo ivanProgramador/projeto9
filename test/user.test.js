@@ -2,6 +2,25 @@ let supertest = require("supertest");
 let app = require("../src/app");
 let request = supertest(app);
 
+/*
+ como o nome da função ja diz essa função sera executada antes de cada teste 
+ dentro dela eu posso colocar qualquer logica, a uitilidade disso e que posso 
+ reaproveitar o codigo ou dados que ela gerar para poder usar nos testes  
+*/ 
+beforeAll(()=>{
+  
+});
+
+/*
+ Essa função será executada depois de todos os testes eu posso usar ela
+ para apagar os dados que não servem mais depois do teste para não sujar 
+ o banco como dados que eu não seram mais uteis depois dos testes   
+*/
+afterAll(()=>{
+
+});
+
+
 describe("cadastro de usuarios",()=>{
 
     test("Deve cadastrar um usuario com sucesso", async ()=>{
