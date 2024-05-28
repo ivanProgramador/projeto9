@@ -7,8 +7,9 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
 mongoose.connect("mongodb://127.0.0.1:27017/guiapics",{useNewUrlParser:true, useUnifiedTopology:true}).then(()=>{
-    console.log('conectado');
-}).catch(err=>{
+   // console.log('conectado');
+}).catch((err)=>{
+    console.log(err);
    
 });
 
@@ -22,14 +23,26 @@ app.get("/",(req,res)=>{
 });
 
 app.post("/user",(req,res)=>{
-   let newUser = new User(
-    {
-        name:req.body.name,
-        email:req.body.email,
-        password: req.body.password
-    });
 
-    newUser.save();
+    if(req.body.name=="" || req.body.email =="" || req.body.password ==""){
+        res.sendStatus(400);
+        return;
+    }
+
+    try {
+
+        let newUser = new User({name:req.body.name,email: req.body.email,password: req.body.password});
+        newUser.save();
+        res.json({email: req.body.email});
+        
+    } catch (err) {
+
+        res.sendStatus(500);
+        
+    }
+
+
+  
 
 
 });
