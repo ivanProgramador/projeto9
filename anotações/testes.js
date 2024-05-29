@@ -2,33 +2,40 @@ let supertest = require("supertest");
 let app = require("../src/app");
 let request = supertest(app);
 
-let mainUser = {name:'Ivan',email:'ivan@teste.com.br', password:'123456'}
+/*
+ como o nome da função ja diz essa função sera executada antes de cada teste 
+ dentro dela eu posso colocar qualquer logica, a uitilidade disso e que posso 
+ reaproveitar o codigo ou dados que ela gerar para poder usar nos testes  
+*/ 
 beforeAll(()=>{
-
-    return request.post("/user").send(mainUser).then(res=>{}).catch(err=>{console.log(err)});
   
 });
 
-
+/*
+ Essa função será executada depois de todos os testes eu posso usar ela
+ para apagar os dados que não servem mais depois do teste para não sujar 
+ o banco como dados que eu não seram mais uteis depois dos testes   
+*/
 afterAll(()=>{
-
-    return request.delete(`/user/${mainUser.email}`).then(res=>{}).catch(err=>{console.log(err)});
 
 });
 
-
+//a função describe separa o teste em grupos por exemplo esse grupo de testes e sobre o cxadastro de usuarios
 describe("cadastro de usuarios",()=>{
-
+ 
+    // esse de fato é um teste que executa o cadastro de um, novo usuario no banco 
     test("Deve cadastrar um usuario com sucesso", async ()=>{
 
         let time = Date.now();
         let email = `${time}@gmail.com`;
-        let user = {name:"Master",email,password:'123456'};
+        let user = {name:"Ivan",email,password:'123456'};
 
        await request.post("/user")
         .send(user)
         .then(res=>{
-
+            //essa e reposta que ele espera da resquisição
+            //qualquer respota diferente dessa o teste vai falhar 
+             
             expect(res.statusCode).toEqual(200);
             expect(res.body.email).toEqual(email);
 
