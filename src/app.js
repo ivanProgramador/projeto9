@@ -5,6 +5,8 @@ let user = require('./models/User');
 let bcrypt = require("bcrypt");
 let jwt = require("jsonwebtoken");
 
+let JWTSecret = "hjdfskjnckdlsncdjncune";
+
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
@@ -71,6 +73,21 @@ app.delete("/user/:email",async (req,res)=>{
     await User.deleteOne({"email": req.params.email});
     res.sendStatus(200);
 })
+
+app.post("/auth",async(req,res)=>{
+    let {email, password} = req.body;
+    jwt.sign({email:email},JWTSecret,{expiresIn:'48h'},(err,token)=>{
+        if(err){
+            res.sendStatus(500);
+            console.log(err);
+        }else{
+            res.json({token})
+        }
+    })
+});
+
+
+
 
 
 
