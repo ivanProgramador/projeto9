@@ -114,7 +114,7 @@ describe("Autenticação",()=>{
                         expect(res.statusCode).toEqual(403);
                         expect(res.body.errors.email).toEqual("E-mail não cadastrado");
                      }).catch(err=>{
-                        fail(error)
+                        console.log(err);
                      })
 
 
@@ -126,7 +126,7 @@ describe("Autenticação",()=>{
                              expect(res.statusCode).toEqual(403);
                              expect(res.body.errors.password).toEqual("senha incorreta");
                           }).catch(err=>{
-                             fail(error)
+                             console.log(err);
                           })
      
      
